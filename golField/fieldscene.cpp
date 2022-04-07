@@ -21,11 +21,18 @@ void FieldScene::createEmptyFieldImage()
 {
     QImage image(m_canvasSizeX, m_canvasSizeY, QImage::Format_RGB32);
 
-    for (int i = 0; i < m_field.size(); i++)
+    for (int x = 0; x < m_canvasSizeX; x++)
     {
-        for (int j = 0; j < m_field[i].size(); j++)
+        for(int y = 0; y < m_canvasSizeY; y++)
         {
-            image.setPixel(j*m_cellSize + 0, i*m_cellSize + 0, qRgb(0,0,0));
+            image.setPixel(x, y, m_deadValue);
+        }
+        for (int i = 0; i < m_field.size(); i++)
+        {
+            for (int j = 0; j < m_field[i].size(); j++)
+            {
+                image.setPixel(j*m_cellSize + 0, i*m_cellSize + 0, qRgb(0,0,0));
+            }
         }
     }
     addPixmap(QPixmap::fromImage(image));

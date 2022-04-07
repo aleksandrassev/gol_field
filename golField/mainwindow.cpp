@@ -45,7 +45,6 @@ void MainWindow::on_pushButtonNew_clicked()
 {
     m_fieldScene->clear();
     m_fieldScene->createEmptyFieldImage();
-    m_ui->pushButtonNext->setEnabled(true);
 
     m_fieldScene->makeEmpty();
     counter = 0;
@@ -53,6 +52,8 @@ void MainWindow::on_pushButtonNew_clicked()
 
     timer->stop();
 
+    m_ui->pushButtonNext->setEnabled(true);
+    m_ui->pushButtonAuto->setEnabled(true);
 }
 
 
@@ -128,7 +129,6 @@ void MainWindow::on_pushButtonAuto_clicked()
         m_ui->pushButtonAuto->setText("Stop");
 
         timer->start();
-
     }
     else
     {
