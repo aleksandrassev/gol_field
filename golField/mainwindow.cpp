@@ -30,8 +30,6 @@ MainWindow::MainWindow(QWidget *parent)
     m_ui->labelConnection->setStyleSheet("font-weight: bold; color: red; font-size: 20px");
     m_ui->pushButtonNext->setEnabled(false);
     m_ui->pushButtonAuto->setEnabled(false);
-    m_ui->pushButtonNew->setEnabled(false);
-
 }
 
 MainWindow::~MainWindow()
@@ -62,21 +60,17 @@ void MainWindow::on_pushButtonConnect_clicked()
     QString my_ip = m_ui->lineEditIP->text();
     int my_port = m_ui ->lineEditPort->text().toInt();
 
-    socket->abort();
-
-    socket->connectToHost(my_ip, my_port);
-
-    if(!socket->waitForConnected(3000))
+    if (m_ui->pushButtonConnect->text() == "Connect")
     {
-        m_ui->labelConnection->setText("Connection failed!");
-        return;
+        connectSocket(my_ip, my_port);
+        m_ui->pushButtonConnect->setText("Disconnect");
     }
-     m_ui->labelConnection->setStyleSheet("font-weight: bold; color: green; font-size: 20px");
-     m_ui->labelConnection->setText("Connected!");
+    else
+    {
+        disconnectSocket();
+        m_ui->pushButtonConnect->setText("Connect");
+    }
 
-     m_ui->pushButtonNext->setEnabled(true);
-     m_ui->pushButtonAuto->setEnabled(true);
-     m_ui->pushButtonNew->setEnabled(true);
 }
 
 void MainWindow::on_pushButtonNext_clicked()
@@ -139,3 +133,30 @@ void MainWindow::on_pushButtonAuto_clicked()
     }
 }
 
+void MainWindow::connectSocket(QString my_ip, int my_port)
+{
+    socket->abort();
+    socket->connectToHost(my_ip, my_port);
+
+    if(!socket->waitForConnected(3000))
+    {
+        m_ui->labelConnection->setText("Connection failed!");
+        return;
+    }
+     m_ui->labelConnection->setStyleSheet("font-weight: bold; color: green; font-size: 20px");
+     m_ui->labelConnection->setText("Connected!");
+     m_ui->pushButtonNext->setEnabled(true);
+     m_ui->pushButtonAuto->setEnabled(true);
+     m_ui->pushButtonNew->setEnabled(true);
+}
+
+void MainWindow::disconnectSocket()
+{
+    socket->abort();
+
+    m_ui->labelConnection->setStyleSheet("font-weight: bold; color: red; font-size: 20px");
+    m_ui->labelConnection->setText("Disconnected!");
+    m_ui->pushButtonNext->setEnabled(false);
+    m_ui->pushButtonAuto->setEnabled(false);
+    m_ui->pushButtonNew->setEnabled(false);
+}

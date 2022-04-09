@@ -39,5 +39,8 @@ private:
 
     QTcpSocket *socket;
     int counter;
+
+    void connectSocket(QString my_ip, int my_port);
+    void disconnectSocket();
 };
 #endif // MAINWINDOW_H
