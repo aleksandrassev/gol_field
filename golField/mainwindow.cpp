@@ -37,6 +37,7 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete this->m_socket;
+    delete m_timer;
     delete m_ui;
     delete m_fieldScene;
 }
@@ -163,6 +164,7 @@ void MainWindow::clientDisconnected()
 {
     m_ui->labelConnection->setStyleSheet("font-weight: bold; color: red; font-size: 20px");
     m_ui->labelConnection->setText("Disconnected!");
+    m_ui->pushButtonConnect->setText("Connect");
     m_ui->pushButtonNext->setEnabled(false);
     m_ui->pushButtonAuto->setEnabled(false);
     m_ui->pushButtonNew->setEnabled(false);
