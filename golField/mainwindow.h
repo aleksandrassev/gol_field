@@ -23,6 +23,9 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+public slots:
+    void clientDisconnected();
+
 private slots:
     void on_pushButtonNext_clicked();
     void on_pushButtonNew_clicked();
@@ -35,10 +38,10 @@ private:
     Ui::MainWindow *m_ui;
     FieldScene *m_fieldScene;
     QGraphicsView *m_view;
-    QTimer *timer;
+    QTimer *m_timer;
 
-    QTcpSocket *socket;
-    int counter;
+    QTcpSocket *m_socket;
+    int m_counter;
 
     void connectSocket(QString my_ip, int my_port);
     void disconnectSocket();
