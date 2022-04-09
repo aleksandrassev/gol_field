@@ -23,15 +23,12 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-public slots:
-    void clientDisconnected();
-
 private slots:
     void on_pushButtonNext_clicked();
     void on_pushButtonNew_clicked();
     void on_pushButtonConnect_clicked();
     void on_pushButtonAuto_clicked();
-
+    void clientDisconnected();
     void socket_readData();   
 
 private:
