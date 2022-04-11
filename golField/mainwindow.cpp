@@ -143,9 +143,10 @@ void MainWindow::connectSocket(QString my_ip, int my_port)
     m_socket->abort();
     m_socket->connectToHost(my_ip, my_port);
 
-    if(!m_socket->waitForConnected(3000))
+    if(!m_socket->waitForConnected(2000))
     {
         m_ui->labelConnection->setText("Connection failed!");
+        m_ui->pushButtonConnect->setText("Connect");
         return;
     }
      m_ui->labelConnection->setStyleSheet("font-weight: bold; color: green; font-size: 20px");
